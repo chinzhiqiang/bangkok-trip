@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<title>曼谷飯店選項</title>
+<style>
+:root{--bg:#f3f1ec;--card:#fff;--fg:#1d2420;--mut:#66706a;--line:#dcd8cf;--acc:#0f5c4d;--tag:#e6efe9;--on:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#141816;--card:#1d2320;--fg:#e9ece8;--mut:#9aa59e;--line:#2e3632;--acc:#7fd0b8;--tag:#24302b;--on:#10201b}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:480px;margin:0 auto;padding:0 0 calc(40px + env(safe-area-inset-bottom))}
+header{padding:calc(20px + env(safe-area-inset-top)) 16px 10px}
+h1{font-size:26px;margin:0 0 2px}
+.sub{color:var(--mut);margin:0;font-size:13px}
+nav{position:sticky;top:0;z-index:5;display:flex;gap:8px;overflow-x:auto;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--line);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;font-size:14px;padding:8px 14px;border:1px solid var(--line);border-radius:99px;color:var(--fg);text-decoration:none;background:var(--card);white-space:nowrap}
+h2{font-size:13px;letter-spacing:.14em;color:var(--mut);margin:26px 16px 10px}
+.h{background:var(--card);border-block:1px solid var(--line);margin-bottom:18px;scroll-margin-top:62px}
+.pw{position:relative}
+.ph{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ph::-webkit-scrollbar{display:none}
+.ph img{flex:none;width:100%;aspect-ratio:4/3;object-fit:cover;scroll-snap-align:center;background:var(--tag);display:block}
+.ct{position:absolute;right:10px;bottom:10px;font-size:12px;line-height:1;padding:5px 9px;border-radius:99px;background:rgba(0,0,0,.55);color:#fff}
+.ph:empty+.ct{display:none}
+.b{padding:14px 16px 18px}
+.area{display:inline-block;font-size:12px;background:var(--tag);color:var(--acc);padding:2px 10px;border-radius:99px;margin-bottom:6px}
+h3{font-size:21px;line-height:1.3;margin:0}
+.vibe{margin:8px 0 12px}
+dl{margin:0;font-size:15.5px}
+dt{color:var(--mut);font-size:12.5px;margin-top:10px}dd{margin:0}
+.lk{margin-top:16px;display:flex;gap:10px}
+.lk a{flex:1;text-align:center;padding:12px 8px;border-radius:10px;font-size:15.5px;text-decoration:none;border:1px solid var(--acc);color:var(--acc)}
+.lk a.p{background:var(--acc);color:var(--on)}
+.cr{display:block;margin-top:10px;font-size:12px;color:var(--mut)}
+footer{font-size:12.5px;color:var(--mut);margin:24px 16px 0;border-top:1px solid var(--line);padding-top:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>曼谷飯店選項</h1>
+<p class="sub">首選 10＋備選 3｜查證日 2026/10/05｜照片可左右滑</p></header>
+<nav id="nav"></nav>
+<div id="list"></div>
+<footer>
+照片為各來源網站的線上圖片（連結式載入，需連網；來源改圖時可能失效），版權屬各飯店／來源所有，僅供內部參考。<br>
+交通距離取自飯店官網或訂房／旅遊網站的標示，實際步行時間依出口與路況而異。
+</footer>
+</div>
+<script>
+const K="https://storage.kempinski.com/cdn-cgi/image/w=1920,f=auto,fit=scale-down,g=auto/ki-cms-prod/images/";
+const C="https://de87ve0y4m3tc.cloudfront.net/comohotels.com-2459770069/cms/cache/v2/";
+const S="https://duvx7h32ggrur.cloudfront.net/attachments/";
+const B=p=>"https://www.banyantree.com/_next/image?url="+encodeURIComponent("https://www.banyantree.com/assets/"+p)+"&w=1200&q=75";
+const H=[
+{g:1,n:"The Sukhothai Bangkok",a:"Sathorn",v:"城市裡的度假村：低樓層建築、蓮花池與庭園，泰式質感。",
+ addr:"13/3 South Sathorn Rd",tr:"MRT Lumphini 步行數分鐘；BTS Sala Daeng 搭車約 5 分鐘",
+ f:"25 m 無邊際泳池、Sukhothai Spa、健身房、7 間餐廳與酒吧",web:"https://bangkok.sukhothai.com/en/",src:"EXO Travel",
+ img:["https://www.exotravel.com/assets/content/hotels/images/exo-travel-hotels-thailand-the-sukhothai-bangkok-gallery-12581513.jpg","https://www.exotravel.com/assets/content/hotels/images/exo-travel-hotels-thailand-the-sukhothai-bangkok-gallery-98274084.jpg","https://www.exotravel.com/assets/content/hotels/images/exo-travel-hotels-thailand-the-sukhothai-bangkok-gallery-20026424.jpg"]},
+{g:1,n:"COMO Metropolitan Bangkok",a:"Sathorn",v:"極簡、沉靜的當代風，主打養生（COMO Shambhala）。",
+ addr:"27 South Sathorn Rd",tr:"MRT 步行約 5 分鐘；另有免費接駁到 BTS",
+ f:"庭院泳池（約 25 m）、COMO Shambhala 水療／每日瑜伽、米其林星級泰菜 nahm",web:"https://www.comohotels.com/en/metropolitanbangkok",src:"COMO 官網",
+ img:[C+"68e48475393c6.jpg/1920x1080/fit/80/aa11f1306610b55bf9ad0c6caf5f17a4.jpg",C+"6929fabbdb4c0.jpg/1772x1180/fit/80/13c838a7291e105a80020177c863ad7d.jpg",C+"6929fadd401c2.jpg/1772x1180/fit/80/3cf7a0b0d3c909a51edce7697aa43495.jpg"]},
+{g:1,n:"KROMO Bangkok, Curio Collection by Hilton",a:"Sukhumvit",v:"2025/9/24 開幕的新飯店；粉、白、淺棕色調，靈感來自曼谷「九寶石之城」，放了很多泰國藝術家作品。",
+ addr:"525 Sukhumvit Rd（Soi 29 口）",tr:"BTS Phrom Phong／Asok、MRT Sukhumvit 之間",
+ f:"306 間房、28 樓頂樓無邊際泳池、法式餐酒館 Colette、健身房",src:"Time Out／Masala",
+ img:["https://media.assettype.com/masalathai%2F2025-08-21%2F3gbl574h%2FPool.jpg","https://media.timeout.com/images/106414535/750/422/image.jpg","https://media.timeout.com/images/106414543/750/422/image.jpg"]},
+{g:1,n:"The Standard, Bangkok Mahanakhon",a:"Silom",v:"在像素大樓 King Power Mahanakhon 裡；Jaime Hayon 設計的復古未來風，色彩大膽、很好拍。",
+ addr:"114 Narathiwas Rd, Silom",tr:"最近 BTS：Chong Nonsi",
+ f:"155 間房、露台泳池、多間餐廳酒吧（Ojo、Mott 32、Sky Beach 等）、可上 Mahanakhon SkyWalk",web:"https://www.standardhotels.com/bangkok/properties/bangkok",src:"The Standard 官網",
+ img:[S+"1bb52bc8a6f0cdb78bf331de971768f4e6b98541/store/optimize_v1/480/60/jpeg/37cf7acb00cd78d340596de7b8ed0cd865dbd33ab1b5903a5c2a09803fe4/thestandard-bangkok-mahanakhon-outdoor-pool-bar-1",S+"03093d39f49a55f27513ae13f51a40640daccbc3/store/optimize_v1/480/60/jpeg/fcfde6978758230d6695a806b7639599c4b28c28edb25ada8606823e8136/the-standard-bangkok-mahanakhon-l1-lobby.jpg",S+"66f4a9d1fcd0b4290416f3fc34d64b3e846ac49a/store/optimize_v1/480/60/jpeg/464953ff30c1594bca1f60be0958a4ffbfac0933a1c9198b3b022e026575/Standard_King_1.jpg"]},
+{g:1,n:"Villa Deva Resort & Hotel",a:"Sathorn",v:"巷子裡的小型度假村：傳統泰式屋頂與木格柵，房間圍著泳池。",
+ addr:"88 Soi Atthakan Prasit, Thung Maha Mek",tr:"MRT Lumphini 約 310 m；另有免費接駁到 MRT／BTS",
+ f:"34 間房＋8 間套房＋1 棟泳池別墅、池畔直通房型、Spa、餐廳與酒吧",web:"https://www.villadeva.com",src:"Tropical Sky／Visit Thailand Today",
+ img:["https://imagedelivery.net/N0Gw7ULLTasLk8yw3zSQZA/Villa-Deva-Resort-and-Hotel.jpg/560x420","https://gorktksmwzabnzbhfrcx.supabase.co/storage/v1/object/public/locations/locations/ChIJNTNf01Gf4jARWQGBGobBeLs/1.jpg","https://gorktksmwzabnzbhfrcx.supabase.co/storage/v1/object/public/locations/locations/ChIJNTNf01Gf4jARWQGBGobBeLs/2.jpg"]},
+{g:1,n:"The Okura Prestige Bangkok",a:"Wireless Rd／Phloen Chit",v:"日系五星，簡約優雅；大廳在 24 樓、客房 26 樓起，全部高樓景觀。",
+ addr:"Park Ventures Ecoplex, 57 Wireless Rd",tr:"有空橋直通 BTS Phloen Chit（開放 06:00–21:00）",
+ f:"240 間房、25 樓 25 m 懸空無邊際泳池、Okura Spa、日料 Yamazato、米其林法餐 Elements",web:"https://www.okurabangkok.com/",src:"Okura 官網",
+ img:["https://image-tc.galaxy.tf/wijpeg-1tpj5btkz2jor1g2rirghm303/shooting-211210-25-copy_standard.jpg?crop=112%2C0%2C1777%2C1333","https://image-tc.galaxy.tf/wijpeg-3uti7pk65k72x47rmdjsbl2bg/lobby-day-with-kimono.jpg?width=1920","https://image-tc.galaxy.tf/wijpeg-bnucheqm2bmruowj37wk9g2e5/dsc02387_standard.jpg?crop=111%2C0%2C1779%2C1334"]},
+{g:1,n:"SO/ Bangkok",a:"Sathorn／倫披尼公園旁",v:"設計感強、偏潮；泰國設計師以自然元素為主題設計，正對倫披尼公園。",
+ addr:"2 North Sathorn Rd, Bangrak",tr:"MRT Lumphini 步行 3 分鐘；BTS Sala Daeng 步行 15 分鐘",
+ f:"237 間房、面公園的無邊際泳池、Spa、健身房、5 間餐廳酒吧",web:"https://so-hotels.com/en/bangkok",src:"SO/ 官網",
+ img:["https://so-hotels.com/wp-content/uploads/sites/19/2023/11/bangkok-exl-800x640-infinitypool-1.jpg","https://so-hotels.com/wp-content/uploads/sites/19/2024/03/SO-Bangkok-Hotel-Exterior-1.jpg","https://so-hotels.com/wp-content/uploads/sites/19/2023/10/bangkok-exl-800x640-hotel-clubsignature-1.jpg"]},
+{g:1,n:"137 Pillars Suites & Residences Bangkok",a:"Sukhumvit Soi 39",v:"住宅區裡的精品全套房飯店，房間大、有管家。",
+ addr:"59/1 Sukhumvit Soi 39",tr:"BTS Phrom Phong 一帶（在 Soi 39 巷內，離站有段距離）",
+ f:"34 間套房＋179 間公寓式房、頂樓無邊際泳池（套房住客專用）、Spa、24 小時管家",src:"Luxury Travel Magazine",
+ img:["https://cdn.luxurytravelmag.com.au/wp-content/uploads/2024/07/24171921/download_Featured-1.jpg","https://cdn.luxurytravelmag.com.au/wp-content/uploads/2017/10/download-5.jpeg","https://cdn.luxurytravelmag.com.au/wp-content/uploads/2017/10/download-4.jpeg"]},
+{g:1,n:"Banyan Tree Bangkok",a:"Sathorn",v:"高樓都會型悅榕庄；61 樓的 Vertigo 餐廳與 Moon Bar 是招牌。",
+ addr:"21/100 South Sathorn Rd",tr:"MRT Lumphini 步行約 8 分鐘（600 m）；BTS Sala Daeng 步行 15 分鐘或搭免費嘟嘟車",
+ f:"21 樓戶外泳池、Banyan Tree Spa、Vertigo & Moon Bar、Saffron 泰菜",web:"https://www.banyantree.com/thailand/bangkok",src:"Banyan Tree 官網",
+ img:[B("2025-09/Hotel Exterior 2023.jpg"),B("2022-10/Dining Vertigo TOO 1920x1080px.jpg"),B("2024-06/BanyanTree 3204 Serenity Suite King3150-Edit.jpg")]},
+{g:1,n:"Grande Centre Point Lumphini Bangkok",a:"Rama IV／倫披尼公園對面",v:"2025 年開幕的大型新飯店，大片落地窗看倫披尼公園與 One Bangkok（在 One Bangkok 對面，不在園區內）。",
+ addr:"1188 Rama IV Rd",tr:"MRT Lumphini 約 250 m",
+ f:"512 間房、高樓泳池、溫泉池（onsen）、Spa、兒童俱樂部、50 樓頂樓餐廳",src:"Trip.com／Tatler Asia",
+ img:["https://ak-d.tripcdn.com/images/1mc6q12000m520c3d03C8_R_960_660_R5_D.jpg","https://cdn.tatlerasia.com/tatlerasia/i/2026/04/28135843-premium-room_cover_1600x1000.jpeg","https://ak-d.tripcdn.com/images/1mc6u12000i72v33aF369_R_600_360_R5.webp"]},
+{g:2,n:"Craftsman Bangkok",a:"Ari／Phahon Yothin",v:"Ari 一帶的小型精品飯店，2018 開幕、2025 翻新。",
+ addr:"34-36 Soi Phahon Yothin 11",tr:"BTS Saphan Khwai 步行 13 分鐘；BTS Ari 步行 14 分鐘",
+ f:"70 間房、戶外泳池與池畔吧、Spa、健身房、餐廳",src:"Trip.com",
+ img:["https://ak-d.tripcdn.com/images/1mc0y12000sy2w0kcF276_R_960_660_R5_D.jpg","https://ak-d.tripcdn.com/images/1mc4012000sy2vy9v8AF7_R_960_660_R5_D.jpg","https://ak-d.tripcdn.com/images/1mc5a12000sy2vzrzCD51_R_600_360_R5.webp"]},
+{g:2,n:"Sindhorn Kempinski Hotel Bangkok",a:"Langsuan／倫披尼公園北側",v:"綠意環繞的 Sindhorn Village 裡，拱形大廳，走典雅路線。",
+ addr:"80 Soi Tonson, Lumphini",tr:"BTS Ratchadamri 約 570 m；BTS Chit Lom 約 1.1 km",
+ f:"12 樓無邊際泳池、4,000 m² 整層 Spa、4 間餐廳",web:"https://www.kempinski.com/en/sindhorn-hotel",src:"Kempinski 官網",
+ img:[K+"6/9/6/9/18469696-2-eng-GB/1b9a45e01136-84161479_4K.jpg",K+"8/7/0/1/171078-1-eng-GB/38805930b5d6-73779170_4K.jpg",K+"0/5/8/5/17695850-2-eng-GB/e305cc5e38ee-84161075_4K.jpg"]},
+{g:2,n:"dusitD2 Samyan Bangkok",a:"Sam Yan／Si Phraya",v:"Dusit 旗下年輕副牌，現代簡潔。",
+ addr:"333 Si Phraya Rd, Bang Rak",tr:"MRT Sam Yan 步行約 10 分鐘；有嘟嘟車接駁",
+ f:"16 樓頂樓泳池、2 間餐廳＋酒吧、24 小時健身房",src:"Secret Escapes",
+ img:["https://images.secretescapes.io/c/hotels/7124/90814e58_4946_415e_a050_d1b9e1e2d3e0.jpg"]}
+];
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+let html="",nav="",cur=0;
+H.forEach((h,i)=>{
+ if(h.g!==cur){cur=h.g;html+=`<h2>${cur===1?"首選":"備選 SECOND CHOICE"}</h2>`}
+ const map="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(h.n+" Bangkok");
+ nav+=`<a href="#h${i}">${esc(h.n.split(",")[0].replace(/ Bangkok$| Hotel Bangkok$/,""))}</a>`;
+ html+=`<section class="h" id="h${i}"><div class="pw"><div class="ph">${h.img.map(u=>`<img src="${u}" alt="${esc(h.n)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`).join("")}</div>${h.img.length>1?`<span class="ct">1 / ${h.img.length}</span>`:""}</div>
+ <div class="b"><span class="area">${h.a}</span><h3>${esc(h.n)}</h3>
+ <p class="vibe">${h.v}</p>
+ <dl><dt>地址</dt><dd>${esc(h.addr)}</dd><dt>交通</dt><dd>${h.tr}</dd><dt>設施</dt><dd>${h.f}</dd></dl>
+ <div class="lk"><a class="p" href="${map}" target="_blank" rel="noopener">Google 地圖</a>${h.web?`<a href="${h.web}" target="_blank" rel="noopener">官網</a>`:""}</div><span class="cr">照片來源：${h.src}</span></div></section>`;
+});
+document.getElementById("list").innerHTML=html;document.getElementById("nav").innerHTML=nav;
+document.querySelectorAll(".ph").forEach(p=>{const c=p.parentNode.querySelector(".ct");if(c)p.addEventListener("scroll",()=>{const n=p.querySelectorAll("img").length;c.textContent=(Math.round(p.scrollLeft/p.clientWidth)+1)+" / "+n},{passive:true})});
+</script>
+</body>
+</html>
